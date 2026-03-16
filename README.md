@@ -11,6 +11,10 @@ A small Streamlit app that extracts transcripts from YouTube videos and uses a P
 - Sends transcript + user query to a Phidata `Agent` (Gemini) with DuckDuckGo web-search tool support.
 - Shows transcript preview and the agent's analysis in markdown.
 
+## Screenshot
+
+![App Dasahboard](image.png)
+
 ## Tech Stack
 
 - Python 3.11+
