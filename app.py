@@ -73,7 +73,7 @@ def initialize_agent():
         model=Gemini(id="gemini-3.1-flash-lite-preview"),
         tools=[DuckDuckGo()],
         markdown=True,
-    )s
+    )
     
 #Initialize the agent
 multimodal_agent = initialize_agent()
