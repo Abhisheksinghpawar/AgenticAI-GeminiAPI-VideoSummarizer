@@ -59,7 +59,7 @@ st.set_page_config(
 )
 
 st.title("Phidata Video AI Summarizer Agent")
-st.header("Powered by Gemini 2.0 Flash Exp")
+st.header("Powered by Gemini 3.1 Flash Lite Preview")
 
 @st.cache_resource
 def initialize_agent():
@@ -70,10 +70,10 @@ def initialize_agent():
     """
     return Agent(
         name="Video AI Summarizer",
-        model=Gemini(id="gemini-2.5-flash-lite"),
+        model=Gemini(id="gemini-3.1-flash-lite-preview"),
         tools=[DuckDuckGo()],
         markdown=True,
-    )
+    )s
     
 #Initialize the agent
 multimodal_agent = initialize_agent()
