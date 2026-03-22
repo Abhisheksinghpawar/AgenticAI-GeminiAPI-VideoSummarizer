@@ -32,7 +32,14 @@ from youtube_transcript_api import (
     CouldNotRetrieveTranscript,
 )
 
-API_KEY = os.environ.get("GOOGLE_API_KEY")
+API_KEY = (
+    os.getenv("GEMINI_API_KEY") 
+    or st.secrets.get("GEMINI_API_KEY")
+)
+
+if not API_KEY:
+    st.error("API key not found. Please set GEMINI_API_KEY.")
+
 
 # Page Configuration
 
@@ -47,7 +54,7 @@ st.header("Powered by Gemini 3.1 Flash Lite Preview")
 
 if not API_KEY:
     st.error(
-        "GOOGLE_API_KEY environment variable is not set. "
+        "GEMINI_API_KEY environment variable is not set. "
         "Set it in your system environment variables and restart the app.\n\n"
         "Get a key at https://aistudio.google.com/app/apikey",
         icon="🔑",
