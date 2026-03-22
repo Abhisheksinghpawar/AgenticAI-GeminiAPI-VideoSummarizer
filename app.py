@@ -107,7 +107,7 @@ def _extract_video_id(url: str) -> str | None:
     return None
 
 
-youtube_url = st.text_input("YouTube URL (paste a public video link)")
+youtube_url = st.text_input("YouTube URL (paste a public video link)", value="https://www.youtube.com/watch?v=Ih1LDnPijFU&pp=ygUbS3Jpc2ggTmFpayB2aWRlbyBzdW1tYXJpemVy")
 user_query = st.text_area(
     "What insights are you seeking from the video?",
     value="Summarize the key points of this video. What is the main topic, what are the most important takeaways, and are there any action items or recommendations mentioned?",
