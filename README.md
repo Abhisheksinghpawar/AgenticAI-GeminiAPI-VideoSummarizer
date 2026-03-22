@@ -4,6 +4,10 @@ A small Streamlit app that extracts transcripts from YouTube videos and uses a P
 
 # Tutorial Video - https://www.youtube.com/watch?v=Ih1LDnPijFU&list=PLZoTAELRMXVMBr14UQ30AFlnlQ7eL5wjl&index=5
 
+## Try the App
+
+[Launch the live app on Streamlit Cloud](https://agenticai-geminiapi-videosummarizer-feyb3ao95q4r7zu6pdrlzb.streamlit.app/)
+
 ## Features
 
 - Accepts a YouTube URL and extracts the transcript (when available).
