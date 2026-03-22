@@ -32,10 +32,10 @@ from youtube_transcript_api import (
     CouldNotRetrieveTranscript,
 )
 
-API_KEY = os.environ.get("GOOGLE_API_KEY")
+API_KEY = os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY")
 if not API_KEY:
     try:
-        API_KEY = st.secrets.get("GOOGLE_API_KEY")
+        API_KEY = st.secrets.get("GOOGLE_API_KEY") or st.secrets.get("GEMINI_API_KEY")
     except Exception:
         pass
 
