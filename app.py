@@ -10,20 +10,20 @@ Key behavior:
 - Fetch transcript via YouTubeTranscriptApi
 - Pass the transcript and user question to the `Agent`
 
-Security / notes:
-- The app expects a Google API key only if you use Google generative APIs elsewhere.
-    Set `GOOGLE_API_KEY` in a `.env` or via environment variables.
-- Do NOT commit secrets. Revoke any leaked keys immediately.
+Setup:
+- Set the GOOGLE_API_KEY system environment variable before running.
+  Windows: setx GOOGLE_API_KEY "your_key_here"  (then restart terminal)
+  Get a key at https://aistudio.google.com/app/apikey
 
 Files:
 - `app.py` - this Streamlit UI and orchestration code
 """
 
+import os
 import streamlit as st
 from phi.agent import Agent
 from phi.model.google import Gemini
 from phi.tools.duckduckgo import DuckDuckGo
-import google.generativeai as genai
 import re
 from youtube_transcript_api import (
     YouTubeTranscriptApi,
@@ -32,24 +32,8 @@ from youtube_transcript_api import (
     CouldNotRetrieveTranscript,
 )
 
-import time
-from pathlib import Path
+API_KEY = os.environ.get("GOOGLE_API_KEY")
 
-import tempfile
-
-from dotenv import load_dotenv
-
-# Load environment variables from a local .env file (optional)
-load_dotenv()
-
-import os
-
-# Google API key used only if you use google.generativeai directly. Keep it private.
-API_KEY = os.getenv("GOOGLE_API_KEY")
-
-if API_KEY:
-    genai.configure(api_key=API_KEY)
-    
 # Page Configuration
 
 st.set_page_config(
@@ -61,6 +45,15 @@ st.set_page_config(
 st.title("Phidata Video AI Summarizer Agent")
 st.header("Powered by Gemini 3.1 Flash Lite Preview")
 
+if not API_KEY:
+    st.error(
+        "GOOGLE_API_KEY environment variable is not set. "
+        "Set it in your system environment variables and restart the app.\n\n"
+        "Get a key at https://aistudio.google.com/app/apikey",
+        icon="🔑",
+    )
+    st.stop()
+
 @st.cache_resource
 def initialize_agent():
     """Initialize and cache the Phidata Agent instance.
@@ -70,7 +63,7 @@ def initialize_agent():
     """
     return Agent(
         name="Video AI Summarizer",
-        model=Gemini(id="gemini-3.1-flash-lite-preview"),
+        model=Gemini(id="gemini-3.1-flash-lite-preview", api_key=API_KEY),
         tools=[DuckDuckGo()],
         markdown=True,
     )
