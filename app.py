@@ -32,14 +32,15 @@ from youtube_transcript_api import (
     CouldNotRetrieveTranscript,
 )
 
-API_KEY = (
-    os.getenv("GEMINI_API_KEY") 
-    or st.secrets.get("GEMINI_API_KEY")
-)
+API_KEY = os.environ.get("GOOGLE_API_KEY")
+if not API_KEY:
+    try:
+        API_KEY = st.secrets.get("GOOGLE_API_KEY")
+    except Exception:
+        pass
 
 if not API_KEY:
     st.error("API key not found. Please set GEMINI_API_KEY.")
-
 
 # Page Configuration
 
@@ -51,6 +52,7 @@ st.set_page_config(
 
 st.title("Phidata Video AI Summarizer Agent")
 st.header("Powered by Gemini 3.1 Flash Lite Preview")
+st.markdown("[![GitHub](https://img.shields.io/badge/Get%20the%20Code-GitHub-black?logo=github)](https://github.com/Abhisheksinghpawar/AgenticAI-GeminiAPI-VideoSummarizer)")
 
 if not API_KEY:
     st.error(
