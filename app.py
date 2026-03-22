@@ -108,7 +108,7 @@ def _extract_video_id(url: str) -> str | None:
 youtube_url = st.text_input("YouTube URL (paste a public video link)")
 user_query = st.text_area(
     "What insights are you seeking from the video?",
-    placeholder="Ask anything about the video content; the Agent will analyze the transcript and gather additional info",
+    value="Summarize the key points of this video. What is the main topic, what are the most important takeaways, and are there any action items or recommendations mentioned?",
     help="Provide specific questions or insights you want from the video",
 )
 
